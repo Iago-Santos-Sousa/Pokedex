@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { fetchPokemonByType } from "./api/fetchPokemonByType";
 
 const PokemonPerType = ({
@@ -9,26 +9,39 @@ const PokemonPerType = ({
   page,
   setPage,
   setOption,
-  pokemonsPerPage,
+  pokemonPerPage,
   pokemonLength,
   setPokemonLength,
   selectedType,
-  setSelectedType,
 }) => {
+  const selectedTypeRef = useRef(selectedType);
+
+  const loadMorePokemon = () => {
+    // Função para carregar mais Pokémon
+    setPage(page + 1);
+  };
+
   console.log(selectedType);
 
   useEffect(() => {
     if (!selectedType) return;
     async function fetchDataByType() {
       setOption(true);
-      const startIndex = (page - 1) * pokemonsPerPage;
+      const startIndex = (page - 1) * pokemonPerPage;
       const { dataLength, pokemonList } = await fetchPokemonByType(
         selectedType,
         startIndex,
-        pokemonsPerPage,
+        pokemonPerPage,
       );
 
-      setPokemonDataType((prev) => [...prev, ...pokemonList]);
+      if (selectedType !== selectedTypeRef.current) {
+        // Verifique se o tipo selecionado mudou e limpe a lista
+        setPokemonDataType(pokemonList);
+        selectedTypeRef.current = selectedType;
+      } else {
+        setPokemonDataType((prev) => [...prev, ...pokemonList]);
+      }
+
       setPokemonLength(dataLength);
       setError(false);
     }
@@ -43,7 +56,7 @@ const PokemonPerType = ({
         ))}
       </ul>
       <button
-        onClick={() => setPage(page + 1)}
+        onClick={loadMorePokemon} // Lidar com o carregamento de mais Pokémon
         disabled={pokemonDataType.length === pokemonLength}
         className="carregar-mais"
       >
