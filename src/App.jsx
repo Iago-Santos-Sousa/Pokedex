@@ -16,7 +16,7 @@ function App() {
   const [checkbox, setCheckbox] = useState("");
 
   // console.log({pokemonData})
-  console.log({ pokemonDataType });
+  // console.log({ pokemonDataType });
   // console.log({ pokemonDataList });
 
   return (
@@ -35,25 +35,6 @@ function App() {
           </div>
         ))}
       </div>
-
-      <FormPokemon
-        setOption={setOption}
-        setPokemonDataList={setPokemonDataList}
-        setPokemonDataType={setPokemonDataType}
-        setCheckbox={setCheckbox}
-      />
-
-      {!option && (
-        <PokemonList
-          pokemonDataList={pokemonDataList}
-          setPokemonDataList={setPokemonDataList}
-          error={error}
-          setError={setError}
-          page={page}
-          setPage={setPage}
-          setOption={setOption}
-        />
-      )}
 
       {checkbox && (
         <PokemonPerType
