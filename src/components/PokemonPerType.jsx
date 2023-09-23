@@ -12,20 +12,20 @@ const PokemonPerType = ({
   pokemonsPerPage,
   pokemonLength,
   setPokemonLength,
-  checkbox,
-  setCheckbox,
+  selectedType,
+  setSelectedType,
 }) => {
-  console.log(checkbox);
+  console.log(selectedType);
 
   useEffect(() => {
-    if (!checkbox) return;
+    if (!selectedType) return;
     // fetchPokemonByType
     async function fetchDataByType() {
       setOption(true);
       // const type = "electric";
       const startIndex = (page - 1) * pokemonsPerPage;
       const { dataLength, pokemonList } = await fetchPokemonByType(
-        checkbox,
+        selectedType,
         startIndex,
         pokemonsPerPage,
       );
@@ -40,7 +40,7 @@ const PokemonPerType = ({
       }
     }
     fetchDataByType();
-  }, [page, checkbox]);
+  }, [page, selectedType]);
 
   return (
     <>

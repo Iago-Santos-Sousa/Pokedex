@@ -13,7 +13,7 @@ function App() {
   const pokemonsPerPage = 9;
   const [pokemonLength, setPokemonLength] = useState(0);
   const [option, setOption] = useState(false);
-  const [checkbox, setCheckbox] = useState("");
+  const [selectedType, setSelectedType] = useState("");
 
   // console.log({pokemonData})
   // console.log({ pokemonDataType });
@@ -30,13 +30,32 @@ function App() {
               name="pokemon"
               id={elem}
               value={elem}
-              onClick={(e) => setCheckbox(e.target.value)}
+              onClick={(e) => setSelectedType(elem)}
             />
           </div>
         ))}
       </div>
 
-      {checkbox && (
+      {/* <FormPokemon
+        setOption={setOption}
+        setPokemonDataList={setPokemonDataList}
+        setPokemonDataType={setPokemonDataType}
+        setCheckbox={setCheckbox}
+      /> */}
+
+      {!option && (
+        <PokemonList
+          pokemonDataList={pokemonDataList}
+          setPokemonDataList={setPokemonDataList}
+          error={error}
+          setError={setError}
+          page={page}
+          setPage={setPage}
+          setOption={setOption}
+        />
+      )}
+
+      {selectedType && (
         <PokemonPerType
           pokemonDataType={pokemonDataType}
           setPokemonDataType={setPokemonDataType}
@@ -48,8 +67,8 @@ function App() {
           pokemonsPerPage={pokemonsPerPage}
           pokemonLength={pokemonLength}
           setPokemonLength={setPokemonLength}
-          checkbox={checkbox}
-          setCheckbox={setCheckbox}
+          selectedType={selectedType}
+          setSelectedType={setSelectedType}
         />
       )}
     </>
