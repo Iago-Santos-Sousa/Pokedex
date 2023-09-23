@@ -19,25 +19,18 @@ const PokemonPerType = ({
 
   useEffect(() => {
     if (!selectedType) return;
-    // fetchPokemonByType
     async function fetchDataByType() {
       setOption(true);
-      // const type = "electric";
       const startIndex = (page - 1) * pokemonsPerPage;
       const { dataLength, pokemonList } = await fetchPokemonByType(
         selectedType,
         startIndex,
         pokemonsPerPage,
       );
-      // console.log(pokemonList);
-      if (pokemonList.length > 0) {
-        setPokemonDataType((prev) => [...prev, ...pokemonList]);
-        setPokemonLength(dataLength);
-        setError(false);
-      } else {
-        setPokemonDataType([]);
-        setError(true);
-      }
+
+      setPokemonDataType((prev) => [...prev, ...pokemonList]);
+      setPokemonLength(dataLength);
+      setError(false);
     }
     fetchDataByType();
   }, [page, selectedType]);
@@ -52,8 +45,9 @@ const PokemonPerType = ({
       <button
         onClick={() => setPage(page + 1)}
         disabled={pokemonDataType.length === pokemonLength}
+        className="carregar-mais"
       >
-        Load more
+        Carregar mais
       </button>
     </>
   );

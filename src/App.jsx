@@ -30,7 +30,7 @@ function App() {
               name="pokemon"
               id={elem}
               value={elem}
-              onClick={(e) => setSelectedType(elem)}
+              onClick={() => setSelectedType(elem)}
             />
           </div>
         ))}
@@ -42,7 +42,7 @@ function App() {
         setPokemonDataType={setPokemonDataType}
         setCheckbox={setCheckbox}
       /> */}
-
+      {/* 
       {!option && (
         <PokemonList
           pokemonDataList={pokemonDataList}
@@ -53,7 +53,7 @@ function App() {
           setPage={setPage}
           setOption={setOption}
         />
-      )}
+      )} */}
 
       {selectedType && (
         <PokemonPerType
