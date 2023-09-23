@@ -4,6 +4,8 @@ import { fetchPokemonByType } from "./components/api/fetchPokemonByType";
 import { fetchPokemonList } from "./components/api/fetchPokemonList";
 import LoadMore from "./components/loadMore";
 import FormPokemon from "./components/FormPokemon";
+import SearchBarAutoComplete from "./components/SearchBarAutoComplete";
+import { pokemonNamesArr } from "./utils/pokemonNamesArr";
 
 function App() {
   const [pokemonData, setPokemonData] = useState(null);
@@ -48,38 +50,39 @@ function App() {
     // }
     // fetchDataByType();
     // fetchPokemonList
-    async function fetchDataList() {
-      const pokemonList = await fetchPokemonList(page);
-      if (pokemonList.length > 0) {
-        setPokemonDataList((prev) => [...prev, ...pokemonList]);
-        setError(false);
-      } else {
-        setPokemonDataList([]);
-        setError(true);
-      }
-    }
-    fetchDataList();
+    // async function fetchDataList() {
+    //   const pokemonList = await fetchPokemonList(page);
+    //   if (pokemonList.length > 0) {
+    //     setPokemonDataList((prev) => [...prev, ...pokemonList]);
+    //     setError(false);
+    //   } else {
+    //     setPokemonDataList([]);
+    //     setError(true);
+    //   }
+    // }
+    // fetchDataList();
   }, [page]);
 
   // console.log({pokemonData})
   // console.log({ pokemonDataType });
-  console.log({ pokemonDataList });
+  // console.log({ pokemonDataList });
 
   return (
     <>
       {/* <LoadMore /> */}
-      <ul>
+      {/* <ul>
         {pokemonDataList.map((elem, index) => (
           <li key={index}>{elem.name}</li>
         ))}
       </ul>
       <button
         onClick={() => setPage(page + 1)}
-        disabled={pokemonDataList.length === 90}
+        disabled={pokemonDataList.length === 100}
       >
         Load more
-      </button>
-      {/* <FormPokemon /> */}
+      </button> */}
+      <FormPokemon />
+      {/* <SearchBarAutoComplete pokemonNames={pokemonNamesArr} /> */}
     </>
   );
 }

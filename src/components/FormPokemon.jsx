@@ -8,20 +8,26 @@ const FormPokemon = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    if (!dataPokemon) return;
     async function fetchDataPokemon() {
-      const { response, data, error } = await fetchPokemon(dataPokemon);
+      const { response, data, error } = await fetchPokemon(
+        dataPokemon.toLocaleLowerCase(),
+      );
+
       if (!error) {
         // setDataPokemon(data);
         setResult(data.name);
         setError(false);
         setDataPokemon("");
+        console.log(response);
       } else {
         setDataPokemon("");
         setError(true);
+        console.log(response);
       }
     }
     fetchDataPokemon();
+    console.log("continue");
   };
 
   return (
