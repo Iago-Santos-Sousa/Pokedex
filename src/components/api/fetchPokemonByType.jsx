@@ -9,8 +9,8 @@ export const fetchPokemonByType = async (
 
   const response = await fetch(URL);
   const data = await response.json();
-  // console.log(data.pokemon.length);
-  let dataLength = data.pokemon.length;
+  let dataLength = data.pokemon ? data.pokemon.length : 0;
+  // console.log(dataLength);
 
   const startIndexClamped = Math.max(0, startIndex); // Garante que startIndex seja no mínimo 0
 

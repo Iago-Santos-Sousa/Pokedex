@@ -1,7 +1,12 @@
 import { fetchPokemon } from "../components/api/fetchPokemon";
 import { useState } from "react";
 
-const FormPokemon = () => {
+const FormPokemon = ({
+  setOption,
+  setPokemonDataList,
+  setPokemonDataType,
+  setCheckbox,
+}) => {
   const [dataPokemon, setDataPokemon] = useState("");
   const [result, setResult] = useState("");
   const [error, setError] = useState(false);
@@ -15,10 +20,14 @@ const FormPokemon = () => {
       );
 
       if (!error) {
+        setOption(true);
         // setDataPokemon(data);
         setResult(data.name);
         setError(false);
         setDataPokemon("");
+        setPokemonDataList([]);
+        setPokemonDataType([]);
+        setCheckbox("");
         console.log(response);
       } else {
         setDataPokemon("");

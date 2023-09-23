@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
-import { fetchPokemon } from "./components/api/fetchPokemon";
-import { fetchPokemonByType } from "./components/api/fetchPokemonByType";
-import { fetchPokemonList } from "./components/api/fetchPokemonList";
-import LoadMore from "./components/loadMore";
 import FormPokemon from "./components/FormPokemon";
-import SearchBarAutoComplete from "./components/SearchBarAutoComplete";
-import { pokemonNamesArr } from "./utils/pokemonNamesArr";
+import PokemonList from "./components/PokemonList";
+import PokemonPerType from "./components/PokemonPerType";
+const typesPokemons = ["normal", "dragon"];
 
 function App() {
   const [pokemonData, setPokemonData] = useState(null);
@@ -15,74 +12,65 @@ function App() {
   const [page, setPage] = useState(1);
   const pokemonsPerPage = 9;
   const [pokemonLength, setPokemonLength] = useState(0);
-
-  useEffect(() => {
-    // fetchPokemon
-    // async function fetchDataPokemon() {
-    //   const { response, data, error } = await fetchPokemon("pikachu");
-    //   if (!error) {
-    //     setPokemonData(data);
-    //     setError(false);
-    //   } else {
-    //     setPokemonData(null);
-    //     setError(true);
-    //   }
-    // }
-    // fetchDataPokemon();
-    // fetchPokemonByType
-    // async function fetchDataByType() {
-    //   const type = "electric";
-    //   const startIndex = (page - 1) * pokemonsPerPage;
-    //   const { dataLength, pokemonList } = await fetchPokemonByType(
-    //     type,
-    //     startIndex,
-    //     pokemonsPerPage,
-    //   );
-    //   // console.log(pokemonList);
-    //   if (pokemonList.length > 0) {
-    //     setPokemonDataType((prev) => [...prev, ...pokemonList]);
-    //     setPokemonLength(dataLength);
-    //     setError(false);
-    //   } else {
-    //     setPokemonDataType([]);
-    //     setError(true);
-    //   }
-    // }
-    // fetchDataByType();
-    // fetchPokemonList
-    // async function fetchDataList() {
-    //   const pokemonList = await fetchPokemonList(page);
-    //   if (pokemonList.length > 0) {
-    //     setPokemonDataList((prev) => [...prev, ...pokemonList]);
-    //     setError(false);
-    //   } else {
-    //     setPokemonDataList([]);
-    //     setError(true);
-    //   }
-    // }
-    // fetchDataList();
-  }, [page]);
+  const [option, setOption] = useState(false);
+  const [checkbox, setCheckbox] = useState("");
 
   // console.log({pokemonData})
-  // console.log({ pokemonDataType });
+  console.log({ pokemonDataType });
   // console.log({ pokemonDataList });
 
   return (
     <>
-      {/* <LoadMore /> */}
-      {/* <ul>
-        {pokemonDataList.map((elem, index) => (
-          <li key={index}>{elem.name}</li>
+      <div>
+        {typesPokemons.map((elem, index) => (
+          <div key={index}>
+            <label htmlFor={elem}>{elem}</label>
+            <input
+              type="radio"
+              name="pokemon"
+              id={elem}
+              value={elem}
+              onClick={(e) => setCheckbox(e.target.value)}
+            />
+          </div>
         ))}
-      </ul>
-      <button
-        onClick={() => setPage(page + 1)}
-        disabled={pokemonDataList.length === 100}
-      >
-        Load more
-      </button> */}
-      <FormPokemon />
-      {/* <SearchBarAutoComplete pokemonNames={pokemonNamesArr} /> */}
+      </div>
+
+      <FormPokemon
+        setOption={setOption}
+        setPokemonDataList={setPokemonDataList}
+        setPokemonDataType={setPokemonDataType}
+        setCheckbox={setCheckbox}
+      />
+
+      {!option && (
+        <PokemonList
+          pokemonDataList={pokemonDataList}
+          setPokemonDataList={setPokemonDataList}
+          error={error}
+          setError={setError}
+          page={page}
+          setPage={setPage}
+          setOption={setOption}
+        />
+      )}
+
+      {checkbox && (
+        <PokemonPerType
+          pokemonDataType={pokemonDataType}
+          setPokemonDataType={setPokemonDataType}
+          error={error}
+          setError={setError}
+          page={page}
+          setPage={setPage}
+          setOption={setOption}
+          pokemonsPerPage={pokemonsPerPage}
+          pokemonLength={pokemonLength}
+          setPokemonLength={setPokemonLength}
+          checkbox={checkbox}
+          setCheckbox={setCheckbox}
+        />
+      )}
     </>
   );
 }
