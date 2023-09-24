@@ -5,8 +5,8 @@ import SearchBarAutoComplete from "../SearchBarAutoComplete/SearchBarAutoComplet
 import { pokemonNamesArr } from "../../utils/pokemonNamesArr";
 
 const FormPokemon = ({
-  setOption,
-  option,
+  setOptionRnder,
+  optionRender,
   setPokemonDataList,
   setPokemonDataType,
   setSelectedType,
@@ -18,7 +18,7 @@ const FormPokemon = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!dataPokemon) return;
-    // setOption(true);
+    // setOptionRnder(true);
     async function fetchDataPokemon() {
       const { response, data, error } = await fetchPokemon(
         dataPokemon.toLocaleLowerCase(),

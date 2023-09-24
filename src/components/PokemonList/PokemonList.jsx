@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchPokemonList } from "../api/fetchPokemonList";
 import PokemonCard from "../PokemonCard/PokemonCard";
+import LoadMoreButton from "../LoadMoreButton/LoadMoreButton";
 
 const PokemonList = ({
   pokemonDataList,
@@ -9,15 +10,10 @@ const PokemonList = ({
   setError,
   page,
   setPage,
-  setOption,
-  option,
+  setOptionRnder,
+  optionRender,
   pokemonLength,
 }) => {
-  const loadMorePokemon = () => {
-    // Função para carregar mais Pokémon
-    setPage(page + 1);
-  };
-
   useEffect(() => {
     async function fetchDataList() {
       const pokemonList = await fetchPokemonList(page);
@@ -32,6 +28,7 @@ const PokemonList = ({
     fetchDataList();
   }, [page]);
 
+  if (pokemonDataList.length <= 0) return;
   return (
     <div className="pokemon-list">
       {pokemonDataList.map((elem, index) => (
@@ -39,13 +36,14 @@ const PokemonList = ({
           <PokemonCard elem={elem} />
         </div>
       ))}
-      <button
-        onClick={loadMorePokemon} // Lidar com o carregamento de mais Pokémon
-        disabled={pokemonDataList.length === pokemonLength}
-        className="carregar-mais"
-      >
-        Carregar mais
-      </button>
+      {pokemonDataList.length > 0 && (
+        <LoadMoreButton
+          page={page}
+          setPage={setPage}
+          pokemonData={pokemonDataList}
+          pokemonLength={pokemonLength}
+        />
+      )}
     </div>
   );
 };

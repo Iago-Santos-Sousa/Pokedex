@@ -10,14 +10,14 @@ function App() {
   const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
   const [pokemonLength, setPokemonLength] = useState(0);
-  const [option, setOption] = useState(false);
+  const [optionRender, setOptionRnder] = useState(false);
   const [selectedType, setSelectedType] = useState("");
   const pokemonPerPage = 9;
   const [isPokemonPerTypeVisible, setIsPokemonPerTypeVisible] = useState(false);
 
-  // console.log({ pokemonDataType });
-  // console.log({ pokemonDataList });
-  console.log({ option });
+  console.log({ pokemonDataType });
+  console.log({ pokemonDataList });
+  console.log({ optionRender });
 
   const handleTypeChange = async (type) => {
     // adiicona o tipo de pokemon ao clicar em algum radio button
@@ -28,7 +28,7 @@ function App() {
     setPokemonDataType([]);
     // Mostrar o componente PokemonPerType quando um tipo é selecionado
     setIsPokemonPerTypeVisible(true);
-    // setOption(true);
+    setOptionRnder(true);
   };
 
   return (
@@ -50,14 +50,14 @@ function App() {
       </div>
 
       <FormPokemon
-        setOption={setOption}
-        option={option}
+        setOptionRnder={setOptionRnder}
+        optionRender={optionRender}
         setPokemonDataList={setPokemonDataList}
         setPokemonDataType={setPokemonDataType}
         setSelectedType={setSelectedType}
       />
 
-      {!option && (
+      {!optionRender && (
         <PokemonList
           pokemonDataList={pokemonDataList}
           setPokemonDataList={setPokemonDataList}
@@ -65,14 +65,14 @@ function App() {
           setError={setError}
           page={page}
           setPage={setPage}
-          setOption={setOption}
-          option={option}
+          setOptionRnder={setOptionRnder}
+          optionRender={optionRender}
           pokemonLength={pokemonLength}
         />
       )}
 
       {/* Renderizar o componente PokemonPerType se for visível */}
-      {isPokemonPerTypeVisible && (
+      {isPokemonPerTypeVisible && optionRender && (
         <PokemonPerType
           pokemonDataType={pokemonDataType}
           setPokemonDataType={setPokemonDataType}
@@ -80,8 +80,8 @@ function App() {
           setError={setError}
           page={page}
           setPage={setPage}
-          setOption={setOption}
-          option={option}
+          setOptionRnder={setOptionRnder}
+          optionRender={optionRender}
           pokemonPerPage={pokemonPerPage}
           pokemonLength={pokemonLength}
           setPokemonLength={setPokemonLength}
