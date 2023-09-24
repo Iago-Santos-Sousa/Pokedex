@@ -37,7 +37,7 @@ const FormPokemon = ({
         setErrorMessage(false);
         setResult(data);
         setDataPokemon("");
-        setPokemonDataList([]);
+        setPokemonDataList((prev) => prev);
         setPokemonDataType([]);
         setSelectedType("");
         setLoadSpinner(false);

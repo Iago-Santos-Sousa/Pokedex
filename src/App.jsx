@@ -17,8 +17,8 @@ function App() {
   const pokemonPerPage = 9;
   const [isPokemonPerTypeVisible, setIsPokemonPerTypeVisible] = useState(false);
 
-  console.log({ pokemonDataType });
-  console.log({ pokemonDataList });
+  // console.log({ pokemonDataType });
+  // console.log({ pokemonDataList });
   // console.log({ optionRender });
 
   const handleTypeChange = async (type) => {
@@ -28,7 +28,7 @@ function App() {
     setPage(1);
     // Limpe os dados existentes quando um novo tipo é selecionado
     setPokemonDataType([]);
-    // setPokemonDataList([]);
+    setPokemonDataList([]);
     // Mostrar o componente PokemonPerType quando um tipo é selecionado
     setIsPokemonPerTypeVisible(true);
     setOptionRnder(true);
@@ -38,8 +38,9 @@ function App() {
     setPokemonDataType([]);
     setOptionRnder(false);
     setSelectedType("");
-    setPokemonDataList([]);
+    setPokemonDataList((prev) => prev);
     setPage(1);
+    console.log("executou aqui");
   };
 
   return (
@@ -47,7 +48,11 @@ function App() {
       <div>
         <button onClick={() => initialPage()}>Inicio</button>
       </div>
-      <div className="checkboxes" style={{ display: "flex", gap: "20px" }}>
+
+      <div
+        className="checkboxes"
+        style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}
+      >
         {typesPokemons.map((elem, index) => (
           <div key={index}>
             <label htmlFor={elem}>{elem}</label>
