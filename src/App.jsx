@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FormPokemon from "./components/FormPokemon/FormPokemon";
 import PokemonList from "./components/PokemonList/PokemonList";
-import PokemonPerType from "./components/PokemonPerType";
+import PokemonPerType from "./components/PokemonPerType/PokemonPerType";
 import { typesPokemons } from "./utils/typesPokemons";
-import PokemonCard from "./components/PokemonCard/PokemonCard";
 
 function App() {
-  const [pokemonData, setPokemonData] = useState(null);
   const [pokemonDataType, setPokemonDataType] = useState([]);
   const [pokemonDataList, setPokemonDataList] = useState([]);
   const [error, setError] = useState(false);
@@ -17,9 +15,9 @@ function App() {
   const pokemonPerPage = 9;
   const [isPokemonPerTypeVisible, setIsPokemonPerTypeVisible] = useState(false);
 
-  // console.log({pokemonData})
   // console.log({ pokemonDataType });
   // console.log({ pokemonDataList });
+  console.log({ option });
 
   const handleTypeChange = async (type) => {
     // adiicona o tipo de pokemon ao clicar em algum radio button
@@ -30,11 +28,12 @@ function App() {
     setPokemonDataType([]);
     // Mostrar o componente PokemonPerType quando um tipo é selecionado
     setIsPokemonPerTypeVisible(true);
+    // setOption(true);
   };
 
   return (
-    <>
-      <div style={{ display: "flex", gap: "20px" }}>
+    <div className="App">
+      <div className="checkboxes" style={{ display: "flex", gap: "20px" }}>
         {typesPokemons.map((elem, index) => (
           <div key={index}>
             <label htmlFor={elem}>{elem}</label>
@@ -49,14 +48,16 @@ function App() {
           </div>
         ))}
       </div>
+
       <FormPokemon
         setOption={setOption}
+        option={option}
         setPokemonDataList={setPokemonDataList}
         setPokemonDataType={setPokemonDataType}
         setSelectedType={setSelectedType}
       />
 
-      {/* {!option && (
+      {!option && (
         <PokemonList
           pokemonDataList={pokemonDataList}
           setPokemonDataList={setPokemonDataList}
@@ -65,11 +66,13 @@ function App() {
           page={page}
           setPage={setPage}
           setOption={setOption}
+          option={option}
+          pokemonLength={pokemonLength}
         />
-      )} */}
+      )}
 
       {/* Renderizar o componente PokemonPerType se for visível */}
-      {/* {isPokemonPerTypeVisible && (
+      {isPokemonPerTypeVisible && (
         <PokemonPerType
           pokemonDataType={pokemonDataType}
           setPokemonDataType={setPokemonDataType}
@@ -78,13 +81,14 @@ function App() {
           page={page}
           setPage={setPage}
           setOption={setOption}
+          option={option}
           pokemonPerPage={pokemonPerPage}
           pokemonLength={pokemonLength}
           setPokemonLength={setPokemonLength}
           selectedType={selectedType}
         />
-      )} */}
-    </>
+      )}
+    </div>
   );
 }
 

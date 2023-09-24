@@ -1,9 +1,12 @@
 import { fetchPokemon } from "../api/fetchPokemon";
 import { useState } from "react";
 import PokemonCard from "../PokemonCard/PokemonCard";
+import SearchBarAutoComplete from "../SearchBarAutoComplete/SearchBarAutoComplete";
+import { pokemonNamesArr } from "../../utils/pokemonNamesArr";
 
 const FormPokemon = ({
   setOption,
+  option,
   setPokemonDataList,
   setPokemonDataType,
   setSelectedType,
@@ -15,13 +18,13 @@ const FormPokemon = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!dataPokemon) return;
+    // setOption(true);
     async function fetchDataPokemon() {
       const { response, data, error } = await fetchPokemon(
         dataPokemon.toLocaleLowerCase(),
       );
 
       if (!error) {
-        setOption(true);
         // setDataPokemon(data);
         setResult(data);
         setError(false);
@@ -29,6 +32,7 @@ const FormPokemon = ({
         setPokemonDataList([]);
         setPokemonDataType([]);
         setSelectedType("");
+
         // console.log(response);
       } else {
         setDataPokemon("");
@@ -37,22 +41,28 @@ const FormPokemon = ({
       }
     }
     fetchDataPokemon();
-    console.log("continue");
+    // console.log("continue");
   };
 
   return (
-    <div>
+    <div className="form-input-search">
       <form onSubmit={handleSubmit}>
-        <input
+        {/* <input
           type="text"
           value={dataPokemon}
           placeholder="procure o pokemon"
           onChange={(e) => setDataPokemon(e.target.value)}
         />
-        <button type="submit">Procurar</button>
+        <button type="submit">Procurar</button> */}
+        <SearchBarAutoComplete
+          value={dataPokemon}
+          setDataPokemon={setDataPokemon}
+          pokemonNamesArr={pokemonNamesArr}
+        />
       </form>
+
       {result && (
-        <div className="container">
+        <div className="container-only-pokemon">
           <PokemonCard elem={result} />
         </div>
       )}

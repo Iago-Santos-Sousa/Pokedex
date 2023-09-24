@@ -10,7 +10,14 @@ const PokemonList = ({
   page,
   setPage,
   setOption,
+  option,
+  pokemonLength,
 }) => {
+  const loadMorePokemon = () => {
+    // Função para carregar mais Pokémon
+    setPage(page + 1);
+  };
+
   useEffect(() => {
     async function fetchDataList() {
       const pokemonList = await fetchPokemonList(page);
@@ -26,19 +33,20 @@ const PokemonList = ({
   }, [page]);
 
   return (
-    <>
+    <div className="pokemon-list">
       {pokemonDataList.map((elem, index) => (
         <div className="container" key={index}>
           <PokemonCard elem={elem} />
         </div>
       ))}
       <button
-        onClick={() => setPage(page + 1)}
-        disabled={pokemonDataList.length === 100}
+        onClick={loadMorePokemon} // Lidar com o carregamento de mais Pokémon
+        disabled={pokemonDataList.length === pokemonLength}
+        className="carregar-mais"
       >
-        Load more
+        Carregar mais
       </button>
-    </>
+    </div>
   );
 };
 

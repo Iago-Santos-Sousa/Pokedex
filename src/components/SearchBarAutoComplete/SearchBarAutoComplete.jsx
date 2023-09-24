@@ -22,17 +22,17 @@ const stylesSearchBox = {
   },
 };
 
-const SearchBarAutoComplete = ({ pokemonNames }) => {
+const SearchBarAutoComplete = ({ value, setDataPokemon, pokemonNamesArr }) => {
   // const availableKeywords = ["HTML", "CSS", "Easy Tutorials", "JavaScript"];
   const [inputValue, setInputValue] = useState("");
   const [results, setResults] = useState([]);
 
   const handleInputChange = (e) => {
     const input = e.target.value;
-    setInputValue(input);
+    setDataPokemon(input);
 
     if (input.length) {
-      const filteredResults = pokemonNames.filter((keyword) =>
+      const filteredResults = pokemonNamesArr.filter((keyword) =>
         keyword.toLowerCase().includes(input.toLowerCase()),
       );
       setResults(filteredResults);
@@ -42,7 +42,7 @@ const SearchBarAutoComplete = ({ pokemonNames }) => {
   };
 
   const handleSelectInput = (selectedValue) => {
-    setInputValue(selectedValue);
+    setDataPokemon(selectedValue);
     setResults([]);
   };
 
@@ -55,7 +55,7 @@ const SearchBarAutoComplete = ({ pokemonNames }) => {
           className={styles.input}
           placeholder="Search anything"
           autoComplete="off"
-          value={inputValue}
+          value={value}
           onChange={handleInputChange}
         />
         <button className={styles.button}>

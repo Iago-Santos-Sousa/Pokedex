@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
-import { fetchPokemonByType } from "./api/fetchPokemonByType";
-import PokemonCard from "./PokemonCard/PokemonCard";
+import { fetchPokemonByType } from "../api/fetchPokemonByType";
+import PokemonCard from "../PokemonCard/PokemonCard";
 
 const PokemonPerType = ({
   pokemonDataType,
@@ -10,6 +10,7 @@ const PokemonPerType = ({
   page,
   setPage,
   setOption,
+  option,
   pokemonPerPage,
   pokemonLength,
   setPokemonLength,
@@ -22,12 +23,12 @@ const PokemonPerType = ({
     setPage(page + 1);
   };
 
-  console.log(selectedType);
+  // console.log(selectedType);
 
   useEffect(() => {
     if (!selectedType) return;
+    // setOption(true);
     async function fetchDataByType() {
-      setOption(true);
       const startIndex = (page - 1) * pokemonPerPage;
       const { dataLength, pokemonList } = await fetchPokemonByType(
         selectedType,
@@ -50,7 +51,7 @@ const PokemonPerType = ({
   }, [page, selectedType]);
 
   return (
-    <>
+    <div className="pokemon-type">
       <ul>
         {pokemonDataType.map((elem, index) => (
           <div className="container" key={index}>
@@ -65,7 +66,7 @@ const PokemonPerType = ({
       >
         Carregar mais
       </button>
-    </>
+    </div>
   );
 };
 
