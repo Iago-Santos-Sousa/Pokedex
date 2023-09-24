@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { fetchPokemonList } from "./api/fetchPokemonList";
+import { fetchPokemonList } from "../api/fetchPokemonList";
+import PokemonCard from "../PokemonCard/PokemonCard";
 
 const PokemonList = ({
   pokemonDataList,
@@ -26,11 +27,11 @@ const PokemonList = ({
 
   return (
     <>
-      <ul>
-        {pokemonDataList.map((elem, index) => (
-          <li key={index}>{elem.name}</li>
-        ))}
-      </ul>
+      {pokemonDataList.map((elem, index) => (
+        <div className="container" key={index}>
+          <PokemonCard elem={elem} />
+        </div>
+      ))}
       <button
         onClick={() => setPage(page + 1)}
         disabled={pokemonDataList.length === 100}

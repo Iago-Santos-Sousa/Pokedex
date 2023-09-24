@@ -1,22 +1,17 @@
-const PokemonCard = () => {
+const PokemonCard = ({ elem }) => {
   return (
-    <div className="container">
-      <div className="card">
-        <div className="bg-pokeball"></div>
-        <span className="pokemon-id">#001</span>
-        <div className="card-title">
-          <h2>bulbasaur</h2>
-          <div className="pokemon-types">
-            <span className="type">grass</span>
-            <span className="type">poison</span>
-          </div>
+    <div className="card">
+      <div className="bg-pokeball"></div>
+      <span className="pokemon-id">{elem.id}</span>
+      <div className="card-title">
+        <h2>{elem.name}</h2>
+        <div className="pokemon-types">
+          <span className="type">{elem.types[0]?.type.name}</span>
+          <span className="type">{elem.types[1]?.type.name}</span>
         </div>
-        <div className="pokemon-image">
-          <img
-            src="	https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg"
-            alt="bulbasaur"
-          />
-        </div>
+      </div>
+      <div className="pokemon-image">
+        <img src={elem.sprites.back_default} alt={elem.name} />
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { fetchPokemonByType } from "./api/fetchPokemonByType";
+import PokemonCard from "./PokemonCard/PokemonCard";
 
 const PokemonPerType = ({
   pokemonDataType,
@@ -52,7 +53,9 @@ const PokemonPerType = ({
     <>
       <ul>
         {pokemonDataType.map((elem, index) => (
-          <li key={index}>{elem.name}</li>
+          <div className="container" key={index}>
+            <PokemonCard elem={elem} />
+          </div>
         ))}
       </ul>
       <button

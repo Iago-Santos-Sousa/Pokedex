@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import FormPokemon from "./components/FormPokemon";
-import PokemonList from "./components/PokemonList";
+import FormPokemon from "./components/FormPokemon/FormPokemon";
+import PokemonList from "./components/PokemonList/PokemonList";
 import PokemonPerType from "./components/PokemonPerType";
 import { typesPokemons } from "./utils/typesPokemons";
 import PokemonCard from "./components/PokemonCard/PokemonCard";
@@ -18,7 +18,7 @@ function App() {
   const [isPokemonPerTypeVisible, setIsPokemonPerTypeVisible] = useState(false);
 
   // console.log({pokemonData})
-  console.log({ pokemonDataType });
+  // console.log({ pokemonDataType });
   // console.log({ pokemonDataList });
 
   const handleTypeChange = async (type) => {
@@ -49,14 +49,14 @@ function App() {
           </div>
         ))}
       </div>
-      {/* <FormPokemon
+      <FormPokemon
         setOption={setOption}
         setPokemonDataList={setPokemonDataList}
         setPokemonDataType={setPokemonDataType}
-        setCheckbox={setCheckbox}
-      /> */}
-      {/* 
-      {!option && (
+        setSelectedType={setSelectedType}
+      />
+
+      {/* {!option && (
         <PokemonList
           pokemonDataList={pokemonDataList}
           setPokemonDataList={setPokemonDataList}
@@ -69,7 +69,7 @@ function App() {
       )} */}
 
       {/* Renderizar o componente PokemonPerType se for visível */}
-      {isPokemonPerTypeVisible && (
+      {/* {isPokemonPerTypeVisible && (
         <PokemonPerType
           pokemonDataType={pokemonDataType}
           setPokemonDataType={setPokemonDataType}
@@ -83,9 +83,7 @@ function App() {
           setPokemonLength={setPokemonLength}
           selectedType={selectedType}
         />
-      )}
-
-      <PokemonCard />
+      )} */}
     </>
   );
 }

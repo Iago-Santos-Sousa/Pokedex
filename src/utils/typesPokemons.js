@@ -16,6 +16,4 @@ export const typesPokemons = [
   "dragon",
   "dark",
   "fairy",
-  "unknown",
-  "shadow",
 ];
