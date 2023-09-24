@@ -1,4 +1,10 @@
-const LoadMoreButton = ({ page, setPage, pokemonData, pokemonLength }) => {
+const LoadMoreButton = ({
+  page,
+  setPage,
+  pokemonData,
+  pokemonLength,
+  isLoading,
+}) => {
   const loadMorePokemon = () => {
     // Função para carregar mais Pokémon
     setPage(page + 1);
@@ -7,7 +13,7 @@ const LoadMoreButton = ({ page, setPage, pokemonData, pokemonLength }) => {
   return (
     <button
       onClick={loadMorePokemon}
-      disabled={pokemonData?.length === pokemonLength}
+      disabled={isLoading || pokemonData?.length === pokemonLength}
       className="carregar-mais"
     >
       Carregar mais

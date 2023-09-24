@@ -2,12 +2,17 @@ import { useEffect, useState, useRef } from "react";
 import { fetchPokemonByType } from "../api/fetchPokemonByType";
 import PokemonCard from "../PokemonCard/PokemonCard";
 import LoadMoreButton from "../LoadMoreButton/LoadMoreButton";
+import LoadSpinner from "../LoadSpinner/LoadSpinner";
 
 const PokemonPerType = ({
   pokemonDataType,
   setPokemonDataType,
   error,
-  setError,
+  setErrorMessage,
+  loadSpinner,
+  setLoadSpinner,
+  isLoading,
+  setIsLoading,
   page,
   setPage,
   setOptionRnder,
@@ -19,12 +24,17 @@ const PokemonPerType = ({
 }) => {
   const selectedTypeRef = useRef(selectedType);
 
-  // console.log(selectedType);
-
   useEffect(() => {
     if (!selectedType) return;
-    // setOptionRnder(true);
-    async function fetchDataByType() {
+    if (page > 1) {
+      setLoadSpinner(false);
+    } else {
+      setLoadSpinner(true);
+    }
+
+    setIsLoading(true); // Defina isLoading como true no início da busca.
+
+    (async () => {
       const startIndex = (page - 1) * pokemonPerPage;
       const { dataLength, pokemonList } = await fetchPokemonByType(
         selectedType,
@@ -36,36 +46,43 @@ const PokemonPerType = ({
         // Verifique se o tipo selecionado mudou e limpe a lista
         setPokemonDataType(pokemonList);
         selectedTypeRef.current = selectedType;
+        setLoadSpinner(false);
       } else {
         setPokemonDataType((prev) => [...prev, ...pokemonList]);
+        setLoadSpinner(false);
       }
 
       setPokemonLength(dataLength);
-      setError(false);
-    }
-    fetchDataByType();
+      setIsLoading(false); // Defina isLoading como false após a busca ser concluída.
+    })();
+    console.log("demorou 3 segundos");
   }, [page, selectedType]);
+
+  console.log({ page });
+  console.log({ pokemonDataType });
+  console.log({ loadSpinner });
 
   if (pokemonDataType.length <= 0) return;
 
   return (
-    <div className="pokemon-type">
-      <ul>
-        {pokemonDataType.map((elem, index) => (
-          <div className="container" key={index}>
-            <PokemonCard elem={elem} />
-          </div>
-        ))}
-      </ul>
+    <>
+      {pokemonDataType.map((elem, index) => (
+        <div className="container-card" key={index}>
+          {loadSpinner && <LoadSpinner />}
+          <PokemonCard elem={elem} />
+        </div>
+      ))}
+
       {pokemonDataType.length > 0 && (
         <LoadMoreButton
           page={page}
           setPage={setPage}
           pokemonData={pokemonDataType}
           pokemonLength={pokemonLength}
+          isLoading={isLoading}
         />
       )}
-    </div>
+    </>
   );
 };
 

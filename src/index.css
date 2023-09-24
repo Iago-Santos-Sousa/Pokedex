@@ -1,10 +1,19 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: borderBox;
+  box-sizing: border-box;
 }
 
 /* body {
   background: #262a2f;
   color: #333;
 } */
+
+.pokedex-container {
+  margin-top: 5rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.load-more-button {
+}

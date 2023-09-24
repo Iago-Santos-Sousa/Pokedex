@@ -23,9 +23,8 @@ const stylesSearchBox = {
 };
 
 const SearchBarAutoComplete = ({ value, setDataPokemon, pokemonNamesArr }) => {
-  // const availableKeywords = ["HTML", "CSS", "Easy Tutorials", "JavaScript"];
-  const [inputValue, setInputValue] = useState("");
   const [results, setResults] = useState([]);
+  // console.log(results);
 
   const handleInputChange = (e) => {
     const input = e.target.value;
@@ -53,12 +52,12 @@ const SearchBarAutoComplete = ({ value, setDataPokemon, pokemonNamesArr }) => {
           type="text"
           id="input-box"
           className={styles.input}
-          placeholder="Search anything"
+          placeholder="Search pokemon"
           autoComplete="off"
           value={value}
           onChange={handleInputChange}
         />
-        <button className={styles.button}>
+        <button className={styles.button} onClick={() => setResults([])}>
           <i
             className="fa-solid fa-magnifying-glass"
             style={stylesSearchBox.faSolid}

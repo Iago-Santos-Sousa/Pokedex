@@ -7,7 +7,9 @@ import { typesPokemons } from "./utils/typesPokemons";
 function App() {
   const [pokemonDataType, setPokemonDataType] = useState([]);
   const [pokemonDataList, setPokemonDataList] = useState([]);
-  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
+  const [loadSpinner, setLoadSpinner] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [pokemonLength, setPokemonLength] = useState(0);
   const [optionRender, setOptionRnder] = useState(false);
@@ -17,7 +19,7 @@ function App() {
 
   console.log({ pokemonDataType });
   console.log({ pokemonDataList });
-  console.log({ optionRender });
+  // console.log({ optionRender });
 
   const handleTypeChange = async (type) => {
     // adiicona o tipo de pokemon ao clicar em algum radio button
@@ -26,13 +28,25 @@ function App() {
     setPage(1);
     // Limpe os dados existentes quando um novo tipo é selecionado
     setPokemonDataType([]);
+    // setPokemonDataList([]);
     // Mostrar o componente PokemonPerType quando um tipo é selecionado
     setIsPokemonPerTypeVisible(true);
     setOptionRnder(true);
   };
 
+  const initialPage = () => {
+    setPokemonDataType([]);
+    setOptionRnder(false);
+    setSelectedType("");
+    setPokemonDataList([]);
+    setPage(1);
+  };
+
   return (
     <div className="App">
+      <div>
+        <button onClick={() => initialPage()}>Inicio</button>
+      </div>
       <div className="checkboxes" style={{ display: "flex", gap: "20px" }}>
         {typesPokemons.map((elem, index) => (
           <div key={index}>
@@ -50,6 +64,10 @@ function App() {
       </div>
 
       <FormPokemon
+        loadSpinner={loadSpinner}
+        setLoadSpinner={setLoadSpinner}
+        errorMessage={errorMessage}
+        setErrorMessage={setErrorMessage}
         setOptionRnder={setOptionRnder}
         optionRender={optionRender}
         setPokemonDataList={setPokemonDataList}
@@ -57,37 +75,47 @@ function App() {
         setSelectedType={setSelectedType}
       />
 
-      {!optionRender && (
-        <PokemonList
-          pokemonDataList={pokemonDataList}
-          setPokemonDataList={setPokemonDataList}
-          error={error}
-          setError={setError}
-          page={page}
-          setPage={setPage}
-          setOptionRnder={setOptionRnder}
-          optionRender={optionRender}
-          pokemonLength={pokemonLength}
-        />
-      )}
+      <div className="pokedex-container">
+        {!optionRender && (
+          <PokemonList
+            pokemonDataList={pokemonDataList}
+            setPokemonDataList={setPokemonDataList}
+            errorMessage={errorMessage}
+            setErrorMessage={setErrorMessage}
+            loadSpinner={loadSpinner}
+            setLoadSpinner={setLoadSpinner}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            page={page}
+            setPage={setPage}
+            setOptionRnder={setOptionRnder}
+            optionRender={optionRender}
+            pokemonLength={pokemonLength}
+          />
+        )}
 
-      {/* Renderizar o componente PokemonPerType se for visível */}
-      {isPokemonPerTypeVisible && optionRender && (
-        <PokemonPerType
-          pokemonDataType={pokemonDataType}
-          setPokemonDataType={setPokemonDataType}
-          error={error}
-          setError={setError}
-          page={page}
-          setPage={setPage}
-          setOptionRnder={setOptionRnder}
-          optionRender={optionRender}
-          pokemonPerPage={pokemonPerPage}
-          pokemonLength={pokemonLength}
-          setPokemonLength={setPokemonLength}
-          selectedType={selectedType}
-        />
-      )}
+        {/* Renderizar o componente PokemonPerType se for visível */}
+        {isPokemonPerTypeVisible && optionRender && (
+          <PokemonPerType
+            pokemonDataType={pokemonDataType}
+            setPokemonDataType={setPokemonDataType}
+            errorMessage={errorMessage}
+            setErrorMessage={setErrorMessage}
+            loadSpinner={loadSpinner}
+            setLoadSpinner={setLoadSpinner}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            page={page}
+            setPage={setPage}
+            setOptionRnder={setOptionRnder}
+            optionRender={optionRender}
+            pokemonPerPage={pokemonPerPage}
+            pokemonLength={pokemonLength}
+            setPokemonLength={setPokemonLength}
+            selectedType={selectedType}
+          />
+        )}
+      </div>
     </div>
   );
 }

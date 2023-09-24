@@ -3,8 +3,14 @@ import { useState } from "react";
 import PokemonCard from "../PokemonCard/PokemonCard";
 import SearchBarAutoComplete from "../SearchBarAutoComplete/SearchBarAutoComplete";
 import { pokemonNamesArr } from "../../utils/pokemonNamesArr";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import LoadSpinner from "../LoadSpinner/LoadSpinner";
 
 const FormPokemon = ({
+  loadSpinner,
+  setLoadSpinner,
+  errorMessage,
+  setErrorMessage,
   setOptionRnder,
   optionRender,
   setPokemonDataList,
@@ -13,47 +19,44 @@ const FormPokemon = ({
 }) => {
   const [dataPokemon, setDataPokemon] = useState("");
   const [result, setResult] = useState(null);
-  const [error, setError] = useState(false);
 
   const handleSubmit = (e) => {
+    setErrorMessage(false);
+    setLoadSpinner(true);
+
     e.preventDefault();
+
     if (!dataPokemon) return;
-    // setOptionRnder(true);
-    async function fetchDataPokemon() {
-      const { response, data, error } = await fetchPokemon(
-        dataPokemon.toLocaleLowerCase(),
+
+    (async () => {
+      const { response, data, errorResponse } = await fetchPokemon(
+        dataPokemon.toLowerCase(),
       );
 
-      if (!error) {
-        // setDataPokemon(data);
+      if (!errorResponse) {
+        setErrorMessage(false);
         setResult(data);
-        setError(false);
         setDataPokemon("");
         setPokemonDataList([]);
         setPokemonDataType([]);
         setSelectedType("");
-
-        // console.log(response);
+        setLoadSpinner(false);
       } else {
-        setDataPokemon("");
-        setError(true);
+        setDataPokemon(data);
+        setResult(null);
         console.log(response);
+        setErrorMessage(true);
+        setLoadSpinner(false);
       }
-    }
-    fetchDataPokemon();
-    // console.log("continue");
+    })();
   };
+
+  // console.log(`result: ${result}`);
+  // console.log(`errorMessage: ${errorMessage}`);
 
   return (
     <div className="form-input-search">
       <form onSubmit={handleSubmit}>
-        {/* <input
-          type="text"
-          value={dataPokemon}
-          placeholder="procure o pokemon"
-          onChange={(e) => setDataPokemon(e.target.value)}
-        />
-        <button type="submit">Procurar</button> */}
         <SearchBarAutoComplete
           value={dataPokemon}
           setDataPokemon={setDataPokemon}
@@ -61,11 +64,17 @@ const FormPokemon = ({
         />
       </form>
 
-      {result && (
+      {loadSpinner && <LoadSpinner />}
+
+      {errorMessage && !result ? (
+        <div className="container-only-pokemon">
+          <ErrorMessage />
+        </div>
+      ) : result && !errorMessage ? (
         <div className="container-only-pokemon">
           <PokemonCard elem={result} />
         </div>
-      )}
+      ) : null}
     </div>
   );
 };

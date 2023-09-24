@@ -3,18 +3,18 @@ export const fetchPokemon = async (pokemon) => {
 
   let response;
   let data;
-  let error;
+  let errorResponse;
 
   try {
     response = await fetch(URL);
     data = await response.json();
-    error = false;
+    errorResponse = false;
   } catch {
-    data = null;
-    error = true;
+    data = "";
+    errorResponse = true;
   }
 
   // console.log({ data });
 
-  return { response, data: data, error };
+  return { response, data: data, errorResponse };
 };
