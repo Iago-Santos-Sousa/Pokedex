@@ -11,7 +11,7 @@ const PokemonCard = ({ elem }) => {
       ?.color || "#ffffff"; // Default to white if type not
 
   return (
-    <div className="card">
+    <div className="card" style={{ background: `${type1Color}` }}>
       <div className="bg-pokeball"></div>
       <span className="pokemon-id">{`#${elem.id
         .toString()

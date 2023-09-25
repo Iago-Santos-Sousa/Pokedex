@@ -13,7 +13,10 @@
   margin-top: 5rem;
   display: flex;
   flex-wrap: wrap;
+  gap: 1rem 1rem;
 }
 
 .load-more-button {
+  /* justify-self: baseline; */
+  align-self: flex-end;
 }

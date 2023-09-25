@@ -16,17 +16,15 @@ const FormPokemon = ({
   setPokemonDataList,
   setPokemonDataType,
   setSelectedType,
+  setFormPokemonResult,
 }) => {
   const [dataPokemon, setDataPokemon] = useState("");
-  const [result, setResult] = useState(null);
 
   const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!dataPokemon) return;
     setErrorMessage(false);
     setLoadSpinner(true);
-
-    e.preventDefault();
-
-    if (!dataPokemon) return;
 
     (async () => {
       const { response, data, errorResponse } = await fetchPokemon(
@@ -35,24 +33,29 @@ const FormPokemon = ({
 
       if (!errorResponse) {
         setErrorMessage(false);
-        setResult(data);
         setDataPokemon("");
-        setPokemonDataList((prev) => prev);
+        setOptionRnder(true);
+        setPokemonDataList((prev) => {
+          return prev.filter((elem) => elem !== elem);
+        });
         setPokemonDataType([]);
         setSelectedType("");
         setLoadSpinner(false);
+        setFormPokemonResult(data);
+        console.log("executou sem erro");
       } else {
-        setDataPokemon(data);
-        setResult(null);
-        console.log(response);
         setErrorMessage(true);
+        setFormPokemonResult(null);
+        setDataPokemon("");
+        setPokemonDataList((prev) => {
+          return prev.filter((elem) => elem !== elem);
+        });
+        setPokemonDataType([]);
+        setOptionRnder(true);
         setLoadSpinner(false);
       }
     })();
   };
-
-  // console.log(`result: ${result}`);
-  // console.log(`errorMessage: ${errorMessage}`);
 
   return (
     <div className="form-input-search">
@@ -63,10 +66,9 @@ const FormPokemon = ({
           pokemonNamesArr={pokemonNamesArr}
         />
       </form>
+      {/* {loadSpinner && <LoadSpinner />} */}
 
-      {loadSpinner && <LoadSpinner />}
-
-      {errorMessage && !result ? (
+      {/* {errorMessage && !dataPokemon ? (
         <div className="container-only-pokemon">
           <ErrorMessage />
         </div>
@@ -74,7 +76,7 @@ const FormPokemon = ({
         <div className="container-only-pokemon">
           <PokemonCard elem={result} />
         </div>
-      ) : null}
+      ) : null} */}
     </div>
   );
 };

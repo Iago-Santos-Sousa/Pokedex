@@ -14,7 +14,7 @@ const LoadMoreButton = ({
     <button
       onClick={loadMorePokemon}
       disabled={isLoading || pokemonData?.length === pokemonLength}
-      className="carregar-mais"
+      className="load-more-button"
     >
       Carregar mais
     </button>

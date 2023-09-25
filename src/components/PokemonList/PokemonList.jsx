@@ -33,7 +33,7 @@ const PokemonList = ({
     })();
   }, [page]);
 
-  if (pokemonDataList.length <= 0) return;
+  // if (pokemonDataList.length <= 0) return;
   return (
     <>
       {pokemonDataList.map((elem, index) => (

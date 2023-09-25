@@ -55,6 +55,7 @@ const PokemonPerType = ({
       setPokemonLength(dataLength);
       setIsLoading(false); // Defina isLoading como false após a busca ser concluída.
     })();
+
     console.log("demorou 3 segundos");
   }, [page, selectedType]);
 
@@ -62,7 +63,7 @@ const PokemonPerType = ({
   console.log({ pokemonDataType });
   console.log({ loadSpinner });
 
-  if (pokemonDataType.length <= 0) return;
+  // if (pokemonDataType.length <= 0) return;
 
   return (
     <>

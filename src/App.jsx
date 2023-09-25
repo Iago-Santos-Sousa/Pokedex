@@ -3,8 +3,12 @@ import FormPokemon from "./components/FormPokemon/FormPokemon";
 import PokemonList from "./components/PokemonList/PokemonList";
 import PokemonPerType from "./components/PokemonPerType/PokemonPerType";
 import { typesPokemons } from "./utils/typesPokemons";
+import PokemonCard from "./components/PokemonCard/PokemonCard";
+import LoadSpinner from "./components/LoadSpinner/LoadSpinner";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 
 function App() {
+  const [formPokemonResult, setFormPokemonResult] = useState(null);
   const [pokemonDataType, setPokemonDataType] = useState([]);
   const [pokemonDataList, setPokemonDataList] = useState([]);
   const [errorMessage, setErrorMessage] = useState(false);
@@ -28,25 +32,39 @@ function App() {
     setPage(1);
     // Limpe os dados existentes quando um novo tipo é selecionado
     setPokemonDataType([]);
-    setPokemonDataList([]);
+    setPokemonDataList((prev) => {
+      console.log("prev dataList:", prev);
+      return [];
+    });
+    setFormPokemonResult(null);
     // Mostrar o componente PokemonPerType quando um tipo é selecionado
     setIsPokemonPerTypeVisible(true);
     setOptionRnder(true);
+    setErrorMessage(false);
+    setLoadSpinner(false);
   };
 
-  const initialPage = () => {
-    setPokemonDataType([]);
-    setOptionRnder(false);
-    setSelectedType("");
-    setPokemonDataList((prev) => prev);
-    setPage(1);
-    console.log("executou aqui");
+  const handleInitialPage = () => {
+    if (pokemonDataList.length === 9) {
+      console.log("array com 9 pokemons");
+      return;
+    } else {
+      setPokemonDataType([]);
+      setOptionRnder(false);
+      setSelectedType("");
+      setPokemonDataList((prev) => {
+        return [];
+      });
+      setFormPokemonResult(null);
+      setPage(1);
+      setErrorMessage(false);
+    }
   };
 
   return (
     <div className="App">
       <div>
-        <button onClick={() => initialPage()}>Inicio</button>
+        <button onClick={() => handleInitialPage()}>Inicio</button>
       </div>
 
       <div
@@ -78,9 +96,22 @@ function App() {
         setPokemonDataList={setPokemonDataList}
         setPokemonDataType={setPokemonDataType}
         setSelectedType={setSelectedType}
+        setFormPokemonResult={setFormPokemonResult}
       />
 
       <div className="pokedex-container">
+        {/* Mostrar o resultado do FormPokemon */}
+        {loadSpinner && <LoadSpinner />}
+        {errorMessage && !formPokemonResult ? (
+          <div className="container-only-pokemon">
+            <ErrorMessage />
+          </div>
+        ) : formPokemonResult && !errorMessage ? (
+          <div className="container-only-pokemon">
+            <PokemonCard elem={formPokemonResult} />
+          </div>
+        ) : null}
+
         {!optionRender && (
           <PokemonList
             pokemonDataList={pokemonDataList}
@@ -100,7 +131,7 @@ function App() {
         )}
 
         {/* Renderizar o componente PokemonPerType se for visível */}
-        {isPokemonPerTypeVisible && optionRender && (
+        {isPokemonPerTypeVisible && optionRender && !formPokemonResult && (
           <PokemonPerType
             pokemonDataType={pokemonDataType}
             setPokemonDataType={setPokemonDataType}
@@ -120,6 +151,12 @@ function App() {
             selectedType={selectedType}
           />
         )}
+
+        {/* {formPokemonResult && (
+          <div className="container-only-pokemon">
+            <PokemonCard elem={formPokemonResult} />
+          </div>
+        )} */}
       </div>
     </div>
   );
