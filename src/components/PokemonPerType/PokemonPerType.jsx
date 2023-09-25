@@ -73,16 +73,6 @@ const PokemonPerType = ({
           <PokemonCard elem={elem} />
         </div>
       ))}
-
-      {pokemonDataType.length > 0 && (
-        <LoadMoreButton
-          page={page}
-          setPage={setPage}
-          pokemonData={pokemonDataType}
-          pokemonLength={pokemonLength}
-          isLoading={isLoading}
-        />
-      )}
     </>
   );
 };

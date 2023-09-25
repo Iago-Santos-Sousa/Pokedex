@@ -6,6 +6,7 @@ import { typesPokemons } from "./utils/typesPokemons";
 import PokemonCard from "./components/PokemonCard/PokemonCard";
 import LoadSpinner from "./components/LoadSpinner/LoadSpinner";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
+import LoadMoreButton from "./components/LoadMoreButton/LoadMoreButton";
 
 function App() {
   const [formPokemonResult, setFormPokemonResult] = useState(null);
@@ -151,13 +152,30 @@ function App() {
             selectedType={selectedType}
           />
         )}
-
-        {/* {formPokemonResult && (
-          <div className="container-only-pokemon">
-            <PokemonCard elem={formPokemonResult} />
-          </div>
-        )} */}
       </div>
+      {pokemonDataList.length > 0 && (
+        <div className="button-container">
+          <LoadMoreButton
+            page={page}
+            setPage={setPage}
+            pokemonData={pokemonDataList}
+            pokemonLength={pokemonLength}
+            isLoading={isLoading}
+          />
+        </div>
+      )}
+
+      {pokemonDataType.length > 0 && (
+        <div className="button-container">
+          <LoadMoreButton
+            page={page}
+            setPage={setPage}
+            pokemonData={pokemonDataType}
+            pokemonLength={pokemonLength}
+            isLoading={isLoading}
+          />
+        </div>
+      )}
     </div>
   );
 }

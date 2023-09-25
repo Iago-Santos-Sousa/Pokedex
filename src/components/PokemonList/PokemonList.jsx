@@ -41,16 +41,6 @@ const PokemonList = ({
           <PokemonCard elem={elem} />
         </div>
       ))}
-
-      {pokemonDataList.length > 0 && (
-        <LoadMoreButton
-          page={page}
-          setPage={setPage}
-          pokemonData={pokemonDataList}
-          pokemonLength={pokemonLength}
-          isLoading={isLoading}
-        />
-      )}
     </>
   );
 };
