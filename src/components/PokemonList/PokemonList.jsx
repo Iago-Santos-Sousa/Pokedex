@@ -21,16 +21,24 @@ const PokemonList = ({
 }) => {
   useEffect(() => {
     setIsLoading(true); // Defina isLoading como true no início da busca.
+    if (pokemonDataList.length <= 0) {
+      setLoadSpinner(true);
+    }
 
-    (async () => {
-      const pokemonList = await fetchPokemonList(page);
-      if (pokemonList.length > 0) {
-        setPokemonDataList((prev) => [...prev, ...pokemonList]);
-      } else {
-        setPokemonDataList([]);
-      }
-      setIsLoading(false); // Defina isLoading como false após a busca ser concluída.
-    })();
+    setTimeout(() => {
+      (async () => {
+        const pokemonList = await fetchPokemonList(page);
+        if (pokemonList.length > 0) {
+          setPokemonDataList((prev) => [...prev, ...pokemonList]);
+          setLoadSpinner(false);
+        } else {
+          setPokemonDataList([]);
+          setLoadSpinner(false);
+        }
+        setIsLoading(false); // Defina isLoading como false após a busca ser concluída.
+        setLoadSpinner(false);
+      })();
+    }, 2 * 1000);
   }, [page]);
 
   // if (pokemonDataList.length <= 0) return;

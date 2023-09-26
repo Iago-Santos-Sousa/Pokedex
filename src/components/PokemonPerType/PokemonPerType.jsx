@@ -34,29 +34,29 @@ const PokemonPerType = ({
 
     setIsLoading(true); // Defina isLoading como true no início da busca.
 
-    (async () => {
-      const startIndex = (page - 1) * pokemonPerPage;
-      const { dataLength, pokemonList } = await fetchPokemonByType(
-        selectedType,
-        startIndex,
-        pokemonPerPage,
-      );
+    setTimeout(() => {
+      (async () => {
+        const startIndex = (page - 1) * pokemonPerPage;
+        const { dataLength, pokemonList } = await fetchPokemonByType(
+          selectedType,
+          startIndex,
+          pokemonPerPage,
+        );
 
-      if (selectedType !== selectedTypeRef.current) {
-        // Verifique se o tipo selecionado mudou e limpe a lista
-        setPokemonDataType(pokemonList);
-        selectedTypeRef.current = selectedType;
-        setLoadSpinner(false);
-      } else {
-        setPokemonDataType((prev) => [...prev, ...pokemonList]);
-        setLoadSpinner(false);
-      }
+        if (selectedType !== selectedTypeRef.current) {
+          // Verifique se o tipo selecionado mudou e limpe a lista
+          setPokemonDataType(pokemonList);
+          selectedTypeRef.current = selectedType;
+          setLoadSpinner(false);
+        } else {
+          setPokemonDataType((prev) => [...prev, ...pokemonList]);
+          setLoadSpinner(false);
+        }
 
-      setPokemonLength(dataLength);
-      setIsLoading(false); // Defina isLoading como false após a busca ser concluída.
-    })();
-
-    console.log("demorou 3 segundos");
+        setPokemonLength(dataLength);
+        setIsLoading(false); // Defina isLoading como false após a busca ser concluída.
+      })();
+    }, 2 * 1000);
   }, [page, selectedType]);
 
   console.log({ page });

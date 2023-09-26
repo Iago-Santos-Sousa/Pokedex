@@ -21,40 +21,45 @@ const FormPokemon = ({
   const [dataPokemon, setDataPokemon] = useState("");
 
   const handleSubmit = (e) => {
+    setPokemonDataType([]);
+    setOptionRnder(true);
+    setFormPokemonResult(null);
     e.preventDefault();
     if (!dataPokemon) return;
     setErrorMessage(false);
     setLoadSpinner(true);
 
-    (async () => {
-      const { response, data, errorResponse } = await fetchPokemon(
-        dataPokemon.toLowerCase(),
-      );
+    setTimeout(() => {
+      (async () => {
+        const { response, data, errorResponse } = await fetchPokemon(
+          dataPokemon.toLowerCase(),
+        );
 
-      if (!errorResponse) {
-        setErrorMessage(false);
-        setDataPokemon("");
-        setOptionRnder(true);
-        setPokemonDataList((prev) => {
-          return prev.filter((elem) => elem !== elem);
-        });
-        setPokemonDataType([]);
-        setSelectedType("");
-        setLoadSpinner(false);
-        setFormPokemonResult(data);
-        console.log("executou sem erro");
-      } else {
-        setErrorMessage(true);
-        setFormPokemonResult(null);
-        setDataPokemon("");
-        setPokemonDataList((prev) => {
-          return prev.filter((elem) => elem !== elem);
-        });
-        setPokemonDataType([]);
-        setOptionRnder(true);
-        setLoadSpinner(false);
-      }
-    })();
+        if (!errorResponse) {
+          setErrorMessage(false);
+          setDataPokemon("");
+          setOptionRnder(true);
+          setPokemonDataList((prev) => {
+            return prev.filter((elem) => elem !== elem);
+          });
+          setPokemonDataType([]);
+          setSelectedType("");
+          setLoadSpinner(false);
+          setFormPokemonResult(data);
+          console.log("executou sem erro");
+        } else {
+          setErrorMessage(true);
+          setFormPokemonResult(null);
+          setDataPokemon("");
+          setPokemonDataList((prev) => {
+            return prev.filter((elem) => elem !== elem);
+          });
+          setPokemonDataType([]);
+          setOptionRnder(true);
+          setLoadSpinner(false);
+        }
+      })();
+    }, 2 * 1000);
   };
 
   return (
@@ -66,17 +71,6 @@ const FormPokemon = ({
           pokemonNamesArr={pokemonNamesArr}
         />
       </form>
-      {/* {loadSpinner && <LoadSpinner />} */}
-
-      {/* {errorMessage && !dataPokemon ? (
-        <div className="container-only-pokemon">
-          <ErrorMessage />
-        </div>
-      ) : result && !errorMessage ? (
-        <div className="container-only-pokemon">
-          <PokemonCard elem={result} />
-        </div>
-      ) : null} */}
     </div>
   );
 };

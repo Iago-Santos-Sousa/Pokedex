@@ -153,7 +153,7 @@ function App() {
           />
         )}
       </div>
-      {pokemonDataList.length > 0 && (
+      {pokemonDataList.length > 0 && !optionRender && (
         <div className="button-container">
           <LoadMoreButton
             page={page}
@@ -165,7 +165,7 @@ function App() {
         </div>
       )}
 
-      {pokemonDataType.length > 0 && (
+      {pokemonDataType.length > 0 && optionRender && (
         <div className="button-container">
           <LoadMoreButton
             page={page}
