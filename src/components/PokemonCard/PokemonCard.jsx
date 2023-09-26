@@ -1,6 +1,12 @@
 import { baseURL } from "../../utils/baseURL";
 import { pokemonTypesColors } from "../../utils/pokemonTypesColors";
 
+const formatPokemonId = (id) => {
+  if (id < 10) return `#00${id}`;
+  else if (id >= 10 && id < 99) return `#0${id}`;
+  else return `#${id}`;
+};
+
 const PokemonCard = ({ elem }) => {
   const type1Color =
     pokemonTypesColors.find((type) => elem.types[0]?.type.name === type.name)
@@ -13,9 +19,7 @@ const PokemonCard = ({ elem }) => {
   return (
     <div className="card" style={{ background: `${type1Color}` }}>
       <div className="bg-pokeball"></div>
-      <span className="pokemon-id">{`#${elem.id
-        .toString()
-        .padStart(3, "000")}`}</span>
+      <span className="pokemon-id">{formatPokemonId(elem.id)}</span>
       <div className="card-title">
         <h2>{elem.name}</h2>
         <div className="descriptions">

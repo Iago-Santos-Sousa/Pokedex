@@ -2,16 +2,18 @@ import { useState } from "react";
 import FormPokemon from "./components/FormPokemon/FormPokemon";
 import PokemonList from "./components/PokemonList/PokemonList";
 import PokemonPerType from "./components/PokemonPerType/PokemonPerType";
-import { typesPokemons } from "./utils/typesPokemons";
 import PokemonCard from "./components/PokemonCard/PokemonCard";
 import LoadSpinner from "./components/LoadSpinner/LoadSpinner";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import LoadMoreButton from "./components/LoadMoreButton/LoadMoreButton";
+import RadioButtons from "./components/RadioButtons/RadioButtons";
+import ButtonInitial from "./components/ButtonInitial/ButtonInitial";
 
 function App() {
   const [formPokemonResult, setFormPokemonResult] = useState(null);
   const [pokemonDataType, setPokemonDataType] = useState([]);
   const [pokemonDataList, setPokemonDataList] = useState([]);
+  const pokemonPerPage = 9;
   const [errorMessage, setErrorMessage] = useState(false);
   const [loadSpinner, setLoadSpinner] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -19,7 +21,6 @@ function App() {
   const [pokemonLength, setPokemonLength] = useState(0);
   const [optionRender, setOptionRnder] = useState(false);
   const [selectedType, setSelectedType] = useState("");
-  const pokemonPerPage = 9;
   const [isPokemonPerTypeVisible, setIsPokemonPerTypeVisible] = useState(false);
 
   // console.log({ pokemonDataType });
@@ -64,28 +65,13 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        <button onClick={() => handleInitialPage()}>Inicio</button>
-      </div>
+      <ButtonInitial handleInitialPage={handleInitialPage} />
 
-      <div
-        className="checkboxes"
-        style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}
-      >
-        {typesPokemons.map((elem, index) => (
-          <div key={index}>
-            <label htmlFor={elem}>{elem}</label>
-            <input
-              type="radio"
-              name="pokemon"
-              id={elem}
-              value={elem}
-              checked={selectedType === elem}
-              onChange={() => handleTypeChange(elem)}
-            />
-          </div>
-        ))}
-      </div>
+      <RadioButtons
+        handleTypeChange={handleTypeChange}
+        selectedType={selectedType}
+        setSelectedType={setSelectedType}
+      />
 
       <FormPokemon
         loadSpinner={loadSpinner}
@@ -153,6 +139,7 @@ function App() {
           />
         )}
       </div>
+
       {pokemonDataList.length > 0 && !optionRender && (
         <div className="button-container">
           <LoadMoreButton

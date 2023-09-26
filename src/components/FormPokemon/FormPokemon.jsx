@@ -21,11 +21,13 @@ const FormPokemon = ({
   const [dataPokemon, setDataPokemon] = useState("");
 
   const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!dataPokemon) {
+      return;
+    }
     setPokemonDataType([]);
     setOptionRnder(true);
     setFormPokemonResult(null);
-    e.preventDefault();
-    if (!dataPokemon) return;
     setErrorMessage(false);
     setLoadSpinner(true);
 
