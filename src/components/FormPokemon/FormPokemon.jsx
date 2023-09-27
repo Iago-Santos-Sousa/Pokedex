@@ -5,19 +5,22 @@ import SearchBarAutoComplete from "../SearchBarAutoComplete/SearchBarAutoComplet
 import { pokemonNamesArr } from "../../utils/pokemonNamesArr";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
+import { usePokemons } from "../../context/PokemonContext";
+import "./FormPokemon.scss";
 
-const FormPokemon = ({
-  loadSpinner,
-  setLoadSpinner,
-  errorMessage,
-  setErrorMessage,
-  setOptionRnder,
-  optionRender,
-  setPokemonDataList,
-  setPokemonDataType,
-  setSelectedType,
-  setFormPokemonResult,
-}) => {
+const FormPokemon = () => {
+  const {
+    loadSpinner,
+    setLoadSpinner,
+    errorMessage,
+    setErrorMessage,
+    setOptionRnder,
+    optionRender,
+    setPokemonDataList,
+    setPokemonDataType,
+    setSelectedType,
+    setFormPokemonResult,
+  } = usePokemons();
   const [dataPokemon, setDataPokemon] = useState("");
 
   const handleSubmit = (e) => {
@@ -31,37 +34,35 @@ const FormPokemon = ({
     setErrorMessage(false);
     setLoadSpinner(true);
 
-    setTimeout(() => {
-      (async () => {
-        const { response, data, errorResponse } = await fetchPokemon(
-          dataPokemon.toLowerCase(),
-        );
+    (async () => {
+      const { response, data, errorResponse } = await fetchPokemon(
+        dataPokemon.toLowerCase(),
+      );
 
-        if (!errorResponse) {
-          setErrorMessage(false);
-          setDataPokemon("");
-          setOptionRnder(true);
-          setPokemonDataList((prev) => {
-            return prev.filter((elem) => elem !== elem);
-          });
-          setPokemonDataType([]);
-          setSelectedType("");
-          setLoadSpinner(false);
-          setFormPokemonResult(data);
-          console.log("executou sem erro");
-        } else {
-          setErrorMessage(true);
-          setFormPokemonResult(null);
-          setDataPokemon("");
-          setPokemonDataList((prev) => {
-            return prev.filter((elem) => elem !== elem);
-          });
-          setPokemonDataType([]);
-          setOptionRnder(true);
-          setLoadSpinner(false);
-        }
-      })();
-    }, 2 * 1000);
+      if (!errorResponse) {
+        setErrorMessage(false);
+        setDataPokemon("");
+        setOptionRnder(true);
+        setPokemonDataList((prev) => {
+          return prev.filter((elem) => elem !== elem);
+        });
+        setPokemonDataType([]);
+        setSelectedType("");
+        setLoadSpinner(false);
+        setFormPokemonResult(data);
+        console.log("executou sem erro");
+      } else {
+        setErrorMessage(true);
+        setFormPokemonResult(null);
+        setDataPokemon("");
+        setPokemonDataList((prev) => {
+          return prev.filter((elem) => elem !== elem);
+        });
+        setPokemonDataType([]);
+        setOptionRnder(true);
+        setLoadSpinner(false);
+      }
+    })();
   };
 
   return (

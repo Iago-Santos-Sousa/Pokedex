@@ -1,26 +1,5 @@
 import React, { useState } from "react";
-import styles from "./SearchBarAutoComplete.module.css";
-
-const stylesSearchBox = {
-  faSolid: {
-    width: "25px",
-    color: "#555",
-    fontSize: "22px",
-    cursor: "pointer",
-  },
-
-  ul: {
-    // borderTop: "1px solid #999",
-    // padding: "15px 10px",
-  },
-
-  li: {
-    listStyle: "none",
-    borderRadius: "3px",
-    padding: "15px 10px",
-    cursor: "pointer",
-  },
-};
+import "./SearchBarAutoComplete.scss";
 
 const SearchBarAutoComplete = ({ value, setDataPokemon, pokemonNamesArr }) => {
   const [results, setResults] = useState([]);
@@ -46,33 +25,24 @@ const SearchBarAutoComplete = ({ value, setDataPokemon, pokemonNamesArr }) => {
   };
 
   return (
-    <div className={styles.searchBox}>
-      <div className={styles.row}>
+    <div className="search-box">
+      <div className="row">
         <input
           type="text"
           id="input-box"
-          className={styles.input}
           placeholder="Search pokemon"
           autoComplete="off"
           value={value}
           onChange={handleInputChange}
         />
-        <button className={styles.button} onClick={() => setResults([])}>
-          <i
-            className="fa-solid fa-magnifying-glass"
-            style={stylesSearchBox.faSolid}
-          ></i>
+        <button onClick={() => setResults([])}>
+          <i className="fa-solid fa-magnifying-glass"></i>
         </button>
       </div>
-      <div className={styles.resultsBox}>
-        <ul style={stylesSearchBox.ul}>
+      <div className="results-box">
+        <ul>
           {results.map((result) => (
-            <li
-              className={styles.li}
-              style={stylesSearchBox.li}
-              key={result}
-              onClick={() => handleSelectInput(result)}
-            >
+            <li key={result} onClick={() => handleSelectInput(result)}>
               {result}
             </li>
           ))}

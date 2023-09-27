@@ -1,5 +1,6 @@
 import { baseURL } from "../../utils/baseURL";
 import { pokemonTypesColors } from "../../utils/pokemonTypesColors";
+import "./PokemonCard.scss";
 
 const formatPokemonId = (id) => {
   if (id < 10) return `#00${id}`;
@@ -45,8 +46,6 @@ const PokemonCard = ({ elem }) => {
               : `${baseURL}/dream-world/${elem.id}.svg`
           }
           alt={elem.name}
-          height="133.031px"
-          width="137.922px"
         />
       </div>
     </div>

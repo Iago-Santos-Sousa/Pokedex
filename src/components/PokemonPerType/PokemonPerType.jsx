@@ -3,25 +3,27 @@ import { fetchPokemonByType } from "../api/fetchPokemonByType";
 import PokemonCard from "../PokemonCard/PokemonCard";
 import LoadMoreButton from "../LoadMoreButton/LoadMoreButton";
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
+import { usePokemons } from "../../context/PokemonContext";
 
-const PokemonPerType = ({
-  pokemonDataType,
-  setPokemonDataType,
-  error,
-  setErrorMessage,
-  loadSpinner,
-  setLoadSpinner,
-  isLoading,
-  setIsLoading,
-  page,
-  setPage,
-  setOptionRnder,
-  optionRender,
-  pokemonPerPage,
-  pokemonLength,
-  setPokemonLength,
-  selectedType,
-}) => {
+const PokemonPerType = () => {
+  const {
+    pokemonDataType,
+    setPokemonDataType,
+    error,
+    setErrorMessage,
+    loadSpinner,
+    setLoadSpinner,
+    isLoading,
+    setIsLoading,
+    page,
+    setPage,
+    setOptionRnder,
+    optionRender,
+    pokemonPerPage,
+    pokemonLength,
+    setPokemonLength,
+    selectedType,
+  } = usePokemons();
   const selectedTypeRef = useRef(selectedType);
 
   useEffect(() => {
@@ -34,29 +36,27 @@ const PokemonPerType = ({
 
     setIsLoading(true); // Defina isLoading como true no início da busca.
 
-    setTimeout(() => {
-      (async () => {
-        const startIndex = (page - 1) * pokemonPerPage;
-        const { dataLength, pokemonList } = await fetchPokemonByType(
-          selectedType,
-          startIndex,
-          pokemonPerPage,
-        );
+    (async () => {
+      const startIndex = (page - 1) * pokemonPerPage;
+      const { dataLength, pokemonList } = await fetchPokemonByType(
+        selectedType,
+        startIndex,
+        pokemonPerPage,
+      );
 
-        if (selectedType !== selectedTypeRef.current) {
-          // Verifique se o tipo selecionado mudou e limpe a lista
-          setPokemonDataType(pokemonList);
-          selectedTypeRef.current = selectedType;
-          setLoadSpinner(false);
-        } else {
-          setPokemonDataType((prev) => [...prev, ...pokemonList]);
-          setLoadSpinner(false);
-        }
+      if (selectedType !== selectedTypeRef.current) {
+        // Verifique se o tipo selecionado mudou e limpe a lista
+        setPokemonDataType(pokemonList);
+        selectedTypeRef.current = selectedType;
+        setLoadSpinner(false);
+      } else {
+        setPokemonDataType((prev) => [...prev, ...pokemonList]);
+        setLoadSpinner(false);
+      }
 
-        setPokemonLength(dataLength);
-        setIsLoading(false); // Defina isLoading como false após a busca ser concluída.
-      })();
-    }, 2 * 1000);
+      setPokemonLength(dataLength);
+      setIsLoading(false); // Defina isLoading como false após a busca ser concluída.
+    })();
   }, [page, selectedType]);
 
   console.log({ page });
