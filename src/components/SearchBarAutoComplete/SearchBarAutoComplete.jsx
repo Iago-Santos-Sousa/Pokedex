@@ -29,7 +29,7 @@ const SearchBarAutoComplete = ({ value, setDataPokemon, pokemonNamesArr }) => {
         <input
           type="text"
           id="input-box"
-          placeholder="Search pokemon"
+          placeholder="Procure um pokemon"
           autoComplete="off"
           value={value}
           onChange={handleInputChange}
