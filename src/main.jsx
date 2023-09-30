@@ -5,10 +5,9 @@ import "./index.scss";
 import PokemonsProvider from "./context/PokemonContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  // <React.StrictMode>
-  <PokemonsProvider>
-    <App />
-  </PokemonsProvider>,
-
-  // </React.StrictMode>,
+  <React.StrictMode>
+    <PokemonsProvider>
+      <App />
+    </PokemonsProvider>
+  </React.StrictMode>,
 );
