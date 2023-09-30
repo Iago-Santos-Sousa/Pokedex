@@ -23,7 +23,7 @@ Essa Pokédex foi feita em ReactJS, utilizando-se de todas as vantagens que o Re
 - API: PokéApi
 
 ## 📌 Links 
- - [Deploy](https://pokedex-react-carlosdancr.vercel.app/)
+ - [Deploy do projeto](https://pokedex-react-hjwpr2sfm-iago-santos-sousas-projects.vercel.app/)
  - [Vite](https://vitejs.dev/)
  - [Sass](https://sass-lang.com/)
  - [PokéAPI](https://pokeapi.co/)
