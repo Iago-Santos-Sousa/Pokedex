@@ -2,6 +2,7 @@ import PokemonCard from "../PokemonCard/PokemonCard";
 import { baseURL } from "../../utils/baseURL";
 import { pokemonTypesColors } from "../../utils/pokemonTypesColors";
 import "./Modal.scss";
+import RangeView from "../RangeView/RangeView";
 const labels = ["HP", "Attack", "Defense", "Sp. Atk", "Sp. Def", "Speed"];
 
 const Modal = ({ pokemon, isHidden, setIsHidden, setPokemon }) => {
@@ -40,8 +41,11 @@ const Modal = ({ pokemon, isHidden, setIsHidden, setPokemon }) => {
         closeModal(e);
       }}
     >
-      <div className="modal-grid">
-        <div className="card-modal" style={{ background: `${type1Color}` }}>
+      <div className="modal-grid" style={{ background: `${type1Color}` }}>
+        <div
+          className="card-modal"
+          // style={{ background: `${type1Color}` }}
+        >
           <div className="card-title">
             <span className="pokemon-id">{formatPokemonId(pokemon?.id)}</span>
             <h2>{pokemon?.name}</h2>
@@ -92,7 +96,7 @@ const Modal = ({ pokemon, isHidden, setIsHidden, setPokemon }) => {
                 <span>{label}</span>
                 <span>{stats[i].base_stat}</span>
                 <div>
-                  <div></div>
+                  <RangeView value={stats[i].base_stat} />
                 </div>
               </li>
             ))}
