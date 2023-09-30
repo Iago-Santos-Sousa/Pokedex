@@ -1,5 +1,11 @@
+import "./LoadSpinner.scss";
+
 const LoadSpinner = () => {
-  return <p>Carregando...</p>;
+  return (
+    <div className="loader-spinner">
+      <i className="fa-solid fa-spinner"></i>
+    </div>
+  );
 };
 
 export default LoadSpinner;

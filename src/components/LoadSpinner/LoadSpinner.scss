@@ -1,0 +1,18 @@
+.loader-spinner {
+  border: 0;
+  outline: none;
+
+  animation: animated-spinner 2s ease infinite;
+
+  > .fa-solid,
+  .fa-spinner {
+    color: #ffffff;
+    font-size: 6rem;
+  }
+}
+
+@keyframes animated-spinner {
+  100% {
+    rotate: 360deg;
+  }
+}

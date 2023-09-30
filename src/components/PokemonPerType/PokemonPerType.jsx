@@ -67,10 +67,10 @@ const PokemonPerType = () => {
 
   return (
     <>
-      {pokemonDataType.map((elem, index) => (
+      {pokemonDataType.map((elem, index, arr) => (
         <div className="container-card" key={index}>
           {loadSpinner && <LoadSpinner />}
-          <PokemonCard elem={elem} />
+          <PokemonCard elem={elem} index={index} arr={arr} />
         </div>
       ))}
     </>

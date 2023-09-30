@@ -44,9 +44,9 @@ const PokemonList = () => {
   // if (pokemonDataList.length <= 0) return;
   return (
     <>
-      {pokemonDataList.map((elem, index) => (
+      {pokemonDataList.map((elem, index, arr) => (
         <div className="container-card" key={index}>
-          <PokemonCard elem={elem} />
+          <PokemonCard elem={elem} index={index} arr={arr} />
         </div>
       ))}
     </>

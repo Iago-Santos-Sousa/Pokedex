@@ -1,0 +1,30 @@
+.radio-types {
+  grid-area: SearchFilter;
+  > span {
+    font-size: 1.5rem;
+    line-height: 135%;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 1rem;
+  }
+}
+
+.radios {
+  text-transform: capitalize;
+  max-width: 360px;
+  overflow-x: scroll;
+  padding: 1rem 1rem;
+  background: linear-gradient(rgb(21, 26, 55) 0%, rgba(21, 26, 55, 0) 100%);
+  border: 1px px solid rgb(36, 41, 63);
+  border-radius: 0.5rem;
+  > ul {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+
+    > li {
+      display: flex;
+      gap: 0.3rem;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1.5rem;
+
+  > ul {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+  }
+}

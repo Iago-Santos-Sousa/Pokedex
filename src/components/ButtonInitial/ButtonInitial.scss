@@ -2,6 +2,8 @@
   align-self: flex-end;
   border: 0;
   outline: none;
+  grid-area: HomeButton;
+  justify-self: start;
 
   > button {
     background: linear-gradient(rgb(21, 26, 55) 0%, rgba(21, 26, 55, 0) 100%);

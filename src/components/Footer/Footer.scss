@@ -1,0 +1,37 @@
+.footer {
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  border-top: 1px solid rgb(36, 41, 63);
+  padding: 1.5rem 0px;
+  margin-top: 5rem;
+}
+
+.footer-descriptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  > span {
+    font-size: 0.75rem;
+    line-height: 150%;
+    font-weight: 400;
+  }
+}
+
+.footer-icons {
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+
+  > a {
+    padding: 0.5rem;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+  }
+}

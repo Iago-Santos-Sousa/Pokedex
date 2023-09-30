@@ -1,5 +1,13 @@
+import "./ErrorMessage.scss";
+import pokemonSvg from "../../assets/images/pokeball-svg.svg";
+
 const ErrorMessage = () => {
-  return <p>Pokemon não encontrado...</p>;
+  return (
+    <div className="error-container">
+      <img src={pokemonSvg} alt="" width="32px" height="32px" />
+      <span>Pokémon não encontrado!</span>
+    </div>
+  );
 };
 
 export default ErrorMessage;

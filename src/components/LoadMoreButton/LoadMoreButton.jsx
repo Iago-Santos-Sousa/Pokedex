@@ -1,3 +1,5 @@
+import "./LoadMoreButton.scss";
+
 const LoadMoreButton = ({
   page,
   setPage,
@@ -14,8 +16,9 @@ const LoadMoreButton = ({
     <button
       onClick={loadMorePokemon}
       disabled={isLoading || pokemonData?.length === pokemonLength}
-      className="load-more-button"
+      className={`load-more-button ${isLoading && "loading"}`}
     >
+      <i className="fa-solid fa-circle-plus"></i>
       Carregar mais
     </button>
   );

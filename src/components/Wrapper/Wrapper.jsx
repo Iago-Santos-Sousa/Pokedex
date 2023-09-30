@@ -9,6 +9,8 @@ import RadioButtons from "../RadioButtons/RadioButtons";
 import ButtonInitial from "../ButtonInitial/ButtonInitial";
 import "./WrapperStyles.scss";
 import { usePokemons } from "../../context/PokemonContext";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
 
 const Wrapper = () => {
   const {
@@ -25,59 +27,63 @@ const Wrapper = () => {
     isLoading,
   } = usePokemons();
   return (
-    <main className="wrapper">
-      <RadioButtons />
-
+    <>
       <div className="main-container">
-        <div className="form-btn">
-          <ButtonInitial />
-          <FormPokemon />
-        </div>
-
-        <div className="pokedex-container">
-          {/* Mostrar o resultado do FormPokemon */}
-          {loadSpinner && <LoadSpinner />}
-          {errorMessage && !formPokemonResult ? (
-            <div className="container-only-pokemon">
-              <ErrorMessage />
+        <Header />
+      </div>
+      <main className="wrapper">
+        <div className="main-container">
+          <div className="form-btn">
+            <ButtonInitial />
+            <RadioButtons />
+            <FormPokemon />
+          </div>
+          <div className="pokedex-container">
+            {/* Mostrar o resultado do FormPokemon */}
+            {loadSpinner && <LoadSpinner />}
+            {errorMessage && !formPokemonResult ? (
+              <div className="container-only-pokemon">
+                <ErrorMessage />
+              </div>
+            ) : formPokemonResult && !errorMessage ? (
+              <div className="container-only-pokemon">
+                <PokemonCard elem={formPokemonResult} />
+              </div>
+            ) : null}
+            {!optionRender && <PokemonList />}
+            {/* Renderizar o componente PokemonPerType se for visível */}
+            {isPokemonPerTypeVisible && optionRender && !formPokemonResult && (
+              <PokemonPerType />
+            )}
+          </div>
+          {pokemonDataList.length > 0 && !optionRender && (
+            <div className="button-container">
+              <LoadMoreButton
+                page={page}
+                setPage={setPage}
+                pokemonData={pokemonDataList}
+                pokemonLength={pokemonLength}
+                isLoading={isLoading}
+              />
             </div>
-          ) : formPokemonResult && !errorMessage ? (
-            <div className="container-only-pokemon">
-              <PokemonCard elem={formPokemonResult} />
+          )}
+          {pokemonDataType.length > 0 && optionRender && (
+            <div className="button-container">
+              <LoadMoreButton
+                page={page}
+                setPage={setPage}
+                pokemonData={pokemonDataType}
+                pokemonLength={pokemonLength}
+                isLoading={isLoading}
+              />
             </div>
-          ) : null}
-
-          {!optionRender && <PokemonList />}
-
-          {/* Renderizar o componente PokemonPerType se for visível */}
-          {isPokemonPerTypeVisible && optionRender && !formPokemonResult && (
-            <PokemonPerType />
           )}
         </div>
-        {pokemonDataList.length > 0 && !optionRender && (
-          <div className="button-container">
-            <LoadMoreButton
-              page={page}
-              setPage={setPage}
-              pokemonData={pokemonDataList}
-              pokemonLength={pokemonLength}
-              isLoading={isLoading}
-            />
-          </div>
-        )}
-        {pokemonDataType.length > 0 && optionRender && (
-          <div className="button-container">
-            <LoadMoreButton
-              page={page}
-              setPage={setPage}
-              pokemonData={pokemonDataType}
-              pokemonLength={pokemonLength}
-              isLoading={isLoading}
-            />
-          </div>
-        )}
+      </main>
+      <div className="main-container">
+        <Footer />
       </div>
-    </main>
+    </>
   );
 };
 

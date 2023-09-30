@@ -1,3 +1,12 @@
 .form-input-search {
-  width: 40%;
+  grid-area: SearchField;
+  justify-self: center;
+  display: grid;
+  width: 100%;
+
+  @media screen and (max-width: 702px) {
+    // margin: 0 auto;
+    // justify-self: stretch;
+    // width: 100%;
+  }
 }

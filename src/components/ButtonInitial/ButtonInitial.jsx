@@ -6,7 +6,7 @@ const ButtonInitial = () => {
   return (
     <div className="btn-initial">
       <button onClick={() => handleInitialPage()}>
-        <i class="fa-solid fa-house-chimney"></i>
+        <i className="fa-solid fa-house-chimney"></i>
         <span>Inicio</span>
       </button>
     </div>

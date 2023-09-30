@@ -15,6 +15,7 @@ export default function PokemonsProvider({ children }) {
   const [optionRender, setOptionRnder] = useState(false);
   const [selectedType, setSelectedType] = useState("");
   const [isPokemonPerTypeVisible, setIsPokemonPerTypeVisible] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
 
   const handleTypeChange = async (type) => {
     // adiicona o tipo de pokemon ao clicar em algum radio button
@@ -39,17 +40,17 @@ export default function PokemonsProvider({ children }) {
     if (pokemonDataList.length === 9) {
       // console.log("array com 9 pokemons");
       return;
-    } else {
-      setPokemonDataType([]);
-      setOptionRnder(false);
-      setSelectedType("");
-      setPokemonDataList((prev) => {
-        return [];
-      });
-      setFormPokemonResult(null);
-      setPage(1);
-      setErrorMessage(false);
     }
+
+    setPokemonDataType([]);
+    setOptionRnder(false);
+    setSelectedType("");
+    setPokemonDataList((prev) => {
+      return [];
+    });
+    setFormPokemonResult(null);
+    setPage(1);
+    setErrorMessage(false);
   };
 
   return (
@@ -80,6 +81,8 @@ export default function PokemonsProvider({ children }) {
         setIsPokemonPerTypeVisible,
         handleTypeChange,
         handleInitialPage,
+        isHidden,
+        setIsHidden,
       }}
     >
       {children}

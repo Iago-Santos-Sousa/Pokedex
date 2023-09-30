@@ -3,7 +3,6 @@ import "./SearchBarAutoComplete.scss";
 
 const SearchBarAutoComplete = ({ value, setDataPokemon, pokemonNamesArr }) => {
   const [results, setResults] = useState([]);
-  // console.log(results);
 
   const handleInputChange = (e) => {
     const input = e.target.value;
