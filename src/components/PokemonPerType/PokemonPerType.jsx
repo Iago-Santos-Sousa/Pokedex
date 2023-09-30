@@ -63,8 +63,6 @@ const PokemonPerType = () => {
   console.log({ pokemonDataType });
   console.log({ loadSpinner });
 
-  // if (pokemonDataType.length <= 0) return;
-
   return (
     <>
       {pokemonDataType.map((elem, index, arr) => (

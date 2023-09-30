@@ -1,13 +1,18 @@
-import PokemonCard from "../PokemonCard/PokemonCard";
 import { baseURL } from "../../utils/baseURL";
 import { pokemonTypesColors } from "../../utils/pokemonTypesColors";
 import "./Modal.scss";
 import RangeView from "../RangeView/RangeView";
 const labels = ["HP", "Attack", "Defense", "Sp. Atk", "Sp. Def", "Speed"];
+import iconClose from "../../assets/images/icon-close.svg";
 
 const Modal = ({ pokemon, isHidden, setIsHidden, setPokemon }) => {
   const closeModal = (e) => {
-    if (e.target.classList.contains("overlay")) {
+    console.log(e.target);
+    if (
+      e.target.classList.contains("overlay") ||
+      e.target.classList.contains("svg-close") ||
+      e.target.classList.contains("btn-close")
+    ) {
       setIsHidden(null);
       setPokemon(null);
     }
@@ -22,17 +27,16 @@ const Modal = ({ pokemon, isHidden, setIsHidden, setPokemon }) => {
   const type1Color =
     pokemonTypesColors.find(
       (type) => pokemon?.types[0]?.type?.name === type?.name,
-    )?.color || "#ffffff"; // Default to white if type not found
+    )?.color || "#ffffff";
 
   const type2Color =
     pokemonTypesColors.find(
       (type) => pokemon?.types[1]?.type?.name === type?.name,
-    )?.color || "#ffffff"; // Default to white if type not
+    )?.color || "#ffffff";
 
   if (!isHidden || !pokemon) return null;
-  // console.log({ pokemon });
+
   const { stats } = pokemon;
-  console.log({ stats });
 
   return (
     <div
@@ -102,7 +106,14 @@ const Modal = ({ pokemon, isHidden, setIsHidden, setPokemon }) => {
             ))}
           </ul>
         </div>
-        {/* <button className="btn-close">Fechar</button> */}
+        <button
+          className="btn-close"
+          onClick={(e) => {
+            closeModal(e);
+          }}
+        >
+          <img src={iconClose} alt="close-icon" className="svg-close" />
+        </button>
       </div>
     </div>
   );

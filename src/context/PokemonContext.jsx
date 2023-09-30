@@ -24,10 +24,7 @@ export default function PokemonsProvider({ children }) {
     setPage(1);
     // Limpe os dados existentes quando um novo tipo é selecionado
     setPokemonDataType([]);
-    setPokemonDataList((prev) => {
-      // console.log("prev dataList:", prev);
-      return [];
-    });
+    setPokemonDataList([]);
     setFormPokemonResult(null);
     // Mostrar o componente PokemonPerType quando um tipo é selecionado
     setIsPokemonPerTypeVisible(true);
@@ -38,16 +35,13 @@ export default function PokemonsProvider({ children }) {
 
   const handleInitialPage = () => {
     if (pokemonDataList.length === 9) {
-      // console.log("array com 9 pokemons");
       return;
     }
 
     setPokemonDataType([]);
     setOptionRnder(false);
     setSelectedType("");
-    setPokemonDataList((prev) => {
-      return [];
-    });
+    setPokemonDataList([]);
     setFormPokemonResult(null);
     setPage(1);
     setErrorMessage(false);

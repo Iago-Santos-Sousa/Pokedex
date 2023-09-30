@@ -18,11 +18,11 @@ const PokemonCard = ({ elem, index, arr }) => {
 
   const type1Color =
     pokemonTypesColors.find((type) => elem?.types[0]?.type?.name === type?.name)
-      ?.color || "#ffffff"; // Default to white if type not found
+      ?.color || "#ffffff";
 
   const type2Color =
     pokemonTypesColors.find((type) => elem?.types[1]?.type?.name === type?.name)
-      ?.color || "#ffffff"; // Default to white if type not
+      ?.color || "#ffffff";
 
   return (
     <>
@@ -58,6 +58,7 @@ const PokemonCard = ({ elem, index, arr }) => {
                 : `${baseURL}/dream-world/${elem?.id}.svg`
             }
             alt={elem?.name}
+            loading="lazy"
           />
         </div>
         <button

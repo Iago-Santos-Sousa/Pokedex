@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+ApiPokemonDemo.jsx
+LoadMore.jsx
+Pagination.jsx
+SearchBar.jsx

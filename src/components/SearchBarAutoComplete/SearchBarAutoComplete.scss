@@ -1,16 +1,8 @@
 .search-box {
   position: relative;
   justify-self: end;
-  // flex: 1 0 100%;
-  // width: 100%;
-  // width: 30.5rem;
-  // flex: 1 1 0%;
-
-  /* background: #fff; */
-  // margin: 0 0 auto auto;
   border-radius: 5px;
   background: #262a2f;
-  /* color: #333; */
   color: #fff;
 
   @media screen and (max-width: 702px) {
@@ -33,7 +25,6 @@
   border: 0;
   outline: 0;
   font-size: 18px;
-  /* color: #333; */
   color: #fff;
 }
 

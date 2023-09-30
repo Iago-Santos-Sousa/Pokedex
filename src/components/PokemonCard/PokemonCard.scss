@@ -4,8 +4,9 @@
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  width: 100%;
+  // width: 100%;
   height: 100%;
+  padding: 2rem 2rem 6rem 2rem;
   border-radius: 1.5rem;
   overflow: hidden;
   text-transform: capitalize;
@@ -22,9 +23,10 @@
     font-weight: bold;
     background-color: transparent;
     cursor: pointer;
+    transition: all 1s ease;
     &:hover {
-      color: #ffffff;
-      // background-color: #ffffff;
+      color: initial;
+      background-color: #ffffff;
     }
   }
 }
@@ -69,18 +71,12 @@
 }
 
 .pokemon-image {
-  // z-index: 1;
-  // display: flex;
-  padding: 6% 3%;
   align-self: flex-start;
-  // width: 50%;
-  height: 90%;
-  overflow: hidden;
+  max-width: 150px;
+  max-height: 150px;
 
   > img {
     width: 100%;
     height: 100%;
-    object-fit: fill;
-    overflow: hidden;
   }
 }

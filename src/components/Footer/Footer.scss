@@ -1,8 +1,6 @@
 .footer {
   display: flex;
-  -webkit-box-pack: justify;
   justify-content: space-between;
-  -webkit-box-align: center;
   align-items: center;
   border-top: 1px solid rgb(36, 41, 63);
   padding: 1.5rem 0px;
@@ -29,9 +27,7 @@
   > a {
     padding: 0.5rem;
     display: flex;
-    -webkit-box-pack: center;
     justify-content: center;
-    -webkit-box-align: center;
     align-items: center;
   }
 }

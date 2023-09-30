@@ -64,7 +64,7 @@ const FormPokemon = () => {
           setLoadSpinner(false);
         }
       })();
-    }, 1 * 1000);
+    }, 2 * 1000);
   };
 
   return (

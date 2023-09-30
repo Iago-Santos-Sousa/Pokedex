@@ -1,8 +1,10 @@
 .loader-spinner {
   border: 0;
   outline: none;
-
+  position: absolute;
   animation: animated-spinner 2s ease infinite;
+  justify-self: center;
+  align-self: center;
 
   > .fa-solid,
   .fa-spinner {
