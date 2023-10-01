@@ -1,5 +1,6 @@
 .radio-types {
   grid-area: SearchFilter;
+
   > span {
     font-size: 1.5rem;
     line-height: 135%;
@@ -17,6 +18,8 @@
   background: linear-gradient(rgb(21, 26, 55) 0%, rgba(21, 26, 55, 0) 100%);
   border: 1px px solid rgb(36, 41, 63);
   border-radius: 0.5rem;
+  cursor: pointer;
+
   > ul {
     display: flex;
     gap: 1rem;
@@ -25,6 +28,13 @@
     > li {
       display: flex;
       gap: 0.3rem;
+      cursor: pointer;
+      > label {
+        cursor: pointer;
+      }
+      > input {
+        cursor: pointer;
+      }
     }
   }
 }

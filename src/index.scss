@@ -71,8 +71,7 @@ body {
   gap: 2rem 2rem;
 
   > .container-only-pokemon {
-    // width: calc(100vw - 100px);
-    // margin: 0 auto;
+    grid-column: 1/4;
     display: flex;
     justify-content: center;
 
