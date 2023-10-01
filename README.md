@@ -19,8 +19,9 @@ Essa Pokédex foi feita em ReactJS, utilizando-se de todas as vantagens que o Re
 - ReactJS
 - Vite
 - Sass(Scss)
-- UseContext 
+- UseContext(Context API) 
 - API: PokéApi
+- Scss(CSS)
 
 ## 📌 Links 
  - [Deploy do projeto](https://pokedex-react-5ya1hsjc9-iago-santos-sousas-projects.vercel.app/)
